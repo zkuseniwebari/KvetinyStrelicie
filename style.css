@@ -1,0 +1,307 @@
+:root {
+    /* -- HLAVNÍ BARVY -- */
+    /* ZMĚNA: Místo zelené je tu tmavě červená (Burgundy) */
+    --primary-color: #69181e;    
+    --accent-color: #d4a373;     /* Zlatá zůstává, k červené jde skvěle */
+    --text-dark: #2c2c2c;
+    --text-light: #f4f4f4;
+    
+    /* -- POZADÍ SEKCI -- */
+    --bg-white: #ffffff;
+    --bg-cream: #fdfbf7;         
+    /* ZMĚNA: Jemný narůžovělý gradient místo zeleného */
+    --bg-sage: linear-gradient(135deg, #fdfbfb 0%, #fcecec 100%); 
+    
+    --glass-border: rgba(255, 255, 255, 0.3);
+    
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif;
+    --transition: all 0.4s ease;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+a { text-decoration: none; color: inherit; transition: var(--transition); }
+img { width: 100%; height: auto; display: block; }
+
+/* --- BACKGROUND COLORS --- */
+.bg-cream { background-color: var(--bg-cream); }
+/* Třídu necháváme jmenovat bg-sage kvůli HTML, ale barva je nová (viz :root) */
+.bg-sage { background: var(--bg-sage); }
+.bg-white { background-color: var(--bg-white); }
+
+/* --- NAVIGACE (GLASSY & TRANSPARENT) --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    position: fixed;
+    width: 90%;
+    left: 5%;
+    top: 20px;
+    z-index: 1000;
+    
+    /* Výchozí stav (nahoře) */
+    background: rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    transition: var(--transition);
+}
+
+/* --- SCROLLED STATE (VÍNOVÉ SKLO) --- */
+.navbar.scrolled {
+    /* ZMĚNA: Průhledná vínová */
+    background: rgba(80, 15, 20, 0.623); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(20px);
+
+    width: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 0px;
+    
+    border-color: rgba(255,255,255,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    color: #fff; 
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.dot { color: var(--accent-color); }
+
+.nav-links { display: flex; list-style: none; align-items: center; }
+
+.nav-links li a {
+    margin-left: 2rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 1px;
+    opacity: 0.9;
+    transition: 0.3s;
+}
+.nav-links li a:hover { color: var(--accent-color); opacity: 1; }
+
+/* --- Upravené tlačítko v navigaci --- */
+.nav-btn {
+    padding: 0.6rem 1.8rem;
+    background: transparent;     /* Průhledné pozadí */
+    border: 2px solid #fff;      /* Bílý rámeček */
+    border-radius: 50px;
+    color: #fff;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.nav-btn:hover {
+    background: #fff;            /* Po najetí celé bílé */
+    border-color: #fff;
+    color: var(--primary-color); /* Text bude vínový (#69181e) */
+    transform: translateY(-2px); /* Malý posun nahoru pro efekt */
+}
+
+/* Burger */
+.burger { display: none; cursor: pointer; }
+.burger div { width: 25px; height: 3px; background: #fff; margin: 5px; transition: var(--transition); }
+
+/* --- HERO SEKCE --- */
+.hero {
+    height: 100vh;
+    width: 100%;
+    /* Tvůj obrázek z HTML (pár v poli) - má hnědo-červené tóny, takže to bude ladit */
+    background-image: url('https://images.unsplash.com/photo-1507290439931-a861b5a38200?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* Jemnější gradient do tmavě hnědé/červené */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(40, 10, 10, 0.4) 50%, rgba(30, 5, 5, 0.8) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    max-width: 800px;
+    padding: 3rem;
+    
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.subtitle {
+    display: block;
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: #eee;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.status-badge {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.6rem 1.8rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: var(--transition);
+}
+
+.cta-button:hover { background-color: #b58555; transform: translateY(-3px); }
+
+/* Scroll Mouse */
+.scroll-down { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 2; opacity: 0.8; }
+.mouse { width: 26px; height: 42px; border: 2px solid #fff; border-radius: 20px; position: relative; }
+.wheel { width: 4px; height: 6px; background: #fff; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); border-radius: 2px; animation: scroll 1.5s infinite; }
+@keyframes scroll { 0% { opacity: 1; top: 8px; } 100% { opacity: 0; top: 25px; } }
+
+/* --- COMMON STYLES --- */
+.section-padding { padding: 6rem 10%; }
+.container { max-width: 1300px; margin: 0 auto; }
+
+.section-heading { font-size: 2.8rem; margin-bottom: 1rem; position: relative; display: inline-block; }
+.section-sub { color: #666; font-size: 1.1rem; margin-bottom: 4rem; font-style: italic; }
+.text-center { text-align: center; }
+
+/* O nás Split */
+.grid-split { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.separator { width: 80px; height: 3px; background-color: var(--accent-color); margin: 2rem 0; }
+.image-wrapper img { border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+
+/* Služby Cards */
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+.service-item {
+    background: #fff;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: var(--transition);
+    border-bottom: 3px solid transparent;
+}
+.service-item:hover { 
+    transform: translateY(-10px); 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    /* ZMĚNA: Podtržení při hoveru je teď vínové nebo zlaté */
+    border-bottom: 3px solid var(--primary-color);
+}
+.service-item .icon { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1.5rem; }
+
+/* Galerie */
+.gallery-wrapper { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.gallery-item img { height: 350px; width: 100%; object-fit: cover; border-radius: 8px; transition: var(--transition); }
+.gallery-item img:hover { transform: scale(1.03); filter: brightness(1.1); }
+
+/* Footer */
+/* ZMĚNA: Velmi tmavá červená (téměř černá) */
+footer { background-color: #1a0505; color: #aaa; }
+.footer-top { border-bottom: 1px solid #331010; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 4rem; }
+.brand-col h3 { color: #fff; font-size: 2rem; margin-bottom: 1rem; }
+.social-btn { color: #fff; transition: 0.3s; }
+.social-btn:hover { color: var(--accent-color); }
+.footer-col h4 { color: #fff; margin-bottom: 1.5rem; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
+.contact-row { margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
+.contact-row i { color: var(--accent-color); width: 20px; }
+.hours-list li { display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px solid #331010; margin-bottom: 0.5rem; }
+.footer-map iframe { filter: grayscale(100%) invert(90%); }
+.footer-bottom { text-align: center; padding: 2rem; background: #0f0202; font-size: 0.8rem; }
+
+/* Animace */
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* Mobil */
+@media screen and (max-width: 960px) {
+    /* ZMĚNA: Mobilní menu má teď taky vínové pozadí */
+    .navbar { width: 100%; left: 0; top: 0; border-radius: 0; background: rgba(80, 15, 20, 0.95); }
+    .hero h1 { font-size: 2.8rem; }
+    .grid-split, .footer-grid, .gallery-wrapper { grid-template-columns: 1fr; }
+    .gallery-item img { height: 250px; }
+    .nav-links {
+        position: absolute; right: 0; height: 100vh; top: 0;
+        background: #1a0505;
+        flex-direction: column; justify-content: center; width: 100%;
+        transform: translateX(100%); transition: 0.5s ease;
+    }
+    .burger { display: block; z-index: 1001; }
+    .nav-active { transform: translateX(0%); }
+    .burger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+    .burger.toggle .line2 { opacity: 0; }
+    .burger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
+
+    .nav-links li {
+        margin: 2rem 0; /* Změna: Větší rozestupy nahoře a dole */
+        opacity: 0;     /* Pro animaci příletu (volitelné, viz níže) */
+        animation: navLinkFade 0.5s ease forwards 0.3s;
+    }
+
+    .nav-links li a {
+        font-size: 1.5rem; /* Změna: Větší písmo pro pohodlné klikání */
+        margin-left: 0;    /* Resetujeme odsazení z desktopu */
+    }
+
+    /* Pokud chceš, aby odkazy při otevření hezky "přilétly", přidej i toto: */
+    @keyframes navLinkFade {
+        from { opacity: 0; transform: translateX(50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+}
